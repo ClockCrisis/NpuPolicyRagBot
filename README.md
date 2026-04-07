@@ -80,6 +80,20 @@ streamlit run app_file_uploader.py
 
 ## 开发记录
 
+### 2026-04-08
+
+#### 动态加载功能
+
+| 文件 | 改动 |
+|------|------|
+| `vector_store.py` | 新增 `refresh()` 方法，重新加载 Chroma |
+| `rag.py` | 新增 `refresh_vector_store()` 方法 |
+| `app_qa.py` | 添加"🔄 刷新知识库"按钮 |
+
+**使用方式**：上传文档后，点击刷新按钮即可加载，无需重启服务。
+
+---
+
 ### 2026-04-07
 
 #### 代码优化
@@ -106,18 +120,5 @@ streamlit run app_file_uploader.py
 | `CLAUDE.md` | Claude Code 项目指导文件 |
 | `summary/` | 开发总结报告、测试报告 |
 | `README.md` | 项目说明文档 |
-
-#### 重要配置变更
-
-```python
-# config.py 关键参数
-chunk_size = 500          # 原 1000，减小保留更精确语义
-chunk_overlap = 150       # 原 100，增加防止边界信息丢失
-similarity_threshold = 5    # 原 3，返回更多相关结果
-
-# vector_store.py
-search_type = "mmr"       # 新增，最大边际相关性检索
-fetch_k = 20              # 新增，获取更多候选
-```
 
 **注意**：修改 chunk_size 后需要重新上传文件到知识库。
