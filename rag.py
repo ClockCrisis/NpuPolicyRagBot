@@ -33,8 +33,14 @@ class RagService(object):
         self.chat_model = create_chat_model()
         self.chain = self.get_chain()
 
+    def refresh_vector_store(self):
+        """刷新向量存储，使新增数据立即可检索"""
+        self.vector_service.refresh()
+        self.chain = self.get_chain()
+        print("知识库已刷新")
 
     def get_chain(self):
+        # 每次创建 chain 时获取最新的 retriever
         retriever = self.vector_service.get_retriever()
 
         def format_docs(docs):

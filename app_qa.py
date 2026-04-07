@@ -13,6 +13,18 @@ if "message" not in st.session_state:
 if "rag" not in st.session_state:
     st.session_state["rag"] = RagService()
 
+# 刷新知识库按钮
+col1, col2 = st.columns([1, 5])
+with col1:
+    if st.button("🔄 刷新知识库"):
+        st.session_state["rag"].refresh_vector_store()
+        st.success("知识库已刷新！")
+
+with col2:
+    st.caption("点击刷新以加载最新上传的文档")
+
+st.divider()
+
 for message in st.session_state["message"]:
     st.chat_message(message["role"]).write(message["content"])
 

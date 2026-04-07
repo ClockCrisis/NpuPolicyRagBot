@@ -1,11 +1,12 @@
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+以下内容非常重要:"本项目目前启动环境为conda管理下的rag.配置环境的时候往rag里面配置.不要配置错了!!!!!!!!"
 
 ## 项目概述
 
 这是一个基于 LangChain + Chroma 向量数据库 + DashScope（阿里云）API 的 RAG（检索增强生成）应用。提供两个 Streamlit 界面：问答系统和知识库文件上传。
-本项目目前启动环境为conda管理下的rag.配置环境的时候往rag里面配置.
+
 
 ## 常用命令
 
