@@ -67,39 +67,6 @@ streamlit run app_file_uploader.py
 | `app_qa.py` | Streamlit 问答界面 |
 | `app_file_uploader.py` | Streamlit 文件上传界面 |
 
----
-
-## 开发记录
-
-### 2026-04-07
-
-#### 新增文件
-
-| 文件 | 说明 |
-|------|------|
-| `model_factory.py` | 模型工厂，支持通过配置切换不同 LLM Provider |
-| `.gitignore` | Git 忽略配置 |
-| `CLAUDE.md` | Claude Code 项目指导文件 |
-| `summary/2026-04-07_summary.md` | 开发总结报告 |
-| `summary/2026-04-07_test_report.md` | 测试报告 |
-
-#### 代码改造
-
-1. **config.py** - 新增多模型配置项
-   - `CHAT_MODEL_NAME`, `CHAT_MODEL_BASE_URL`, `CHAT_MODEL_API_KEY`
-   - `EMBEDDING_MODEL_NAME`, `EMBEDDING_MODEL_BASE_URL`, `EMBEDDING_MODEL_API_KEY`
-
-2. **model_factory.py** - 新增模型工厂模块
-   - 统一使用 `ChatOpenAI` + `base_url` 适配任意 OpenAI 兼容 API
-   - 支持 vLLM、通义千问等
-
-3. **app_file_uploader.py** - 新增文件解析功能
-   - 支持 PDF、DOCX、TXT 文件上传
-   - 使用 `PyPDFLoader` 和 `Docx2txtLoader` 解析
-
-4. **app_qa.py** - 界面更名
-   - 标题改为"西工大政策问答平台"
-
 #### 功能特性
 
 - 支持任意 OpenAI 兼容 API 的 LLM（通过 `base_url` 配置）
