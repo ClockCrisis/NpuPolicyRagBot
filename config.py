@@ -1,10 +1,10 @@
 md5_path = "md5.text"
 collection_name = "RAG"
 persist_directory = "./chroma_db"
-chunk_size = 1000
-chunk_overlap = 100
-separators = ["\n\n", "\n", ".", "!", "?", ",", " ", ""]
-similarity_threshold = 3
+chunk_size = 500              # 优化: 减小到 300-500，保留更精确的语义
+chunk_overlap = 150           # 优化: 增加 overlap 防止边界信息丢失
+separators = ["\n\n", "\n", "。", "！", "？", "；", "，", " ", ""]  # 优化: 中文友好分割符
+similarity_threshold = 5      # 优化: 增加 k 值，返回更多相关结果
 
 # =============================================================================
 # Chat Model 配置

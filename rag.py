@@ -15,8 +15,17 @@ class RagService(object):
         )
         self.prompt_template = ChatPromptTemplate.from_messages(
             [
-                ("system", "以我提供的参考资料为主简洁回答问题, 参考资料:{context}"),
-                ("system","已有的历史记录如下:"),
+                ("system", """根据提供的参考资料回答问题。
+
+要求：
+1. 以参考资料为主，参考资料中没有的信息不要编造
+2. 如有冲突，以最新参考资料为准
+3. 回答要简洁，引用相关来源
+4. 如果参考资料中没有相关信息，请如实说明
+
+参考资料：
+{context}"""),
+                ("system", "已有的历史记录如下:"),
                 MessagesPlaceholder(variable_name="history"),
                 ("human", "{input}")
             ]

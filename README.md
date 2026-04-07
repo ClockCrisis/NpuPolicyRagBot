@@ -73,3 +73,51 @@ streamlit run app_file_uploader.py
 - 支持 PDF、DOCX、TXT 文件解析并存入知识库
 - MD5 去重机制防止重复上传
 - 会话历史持久化存储
+- MMR 多样性检索，提升结果覆盖
+- 中文友好的文本分割策略
+
+---
+
+## 开发记录
+
+### 2026-04-07
+
+#### 代码优化
+
+| 文件 | 优化内容 |
+|------|----------|
+| `config.py` | chunk_size 1000→500, overlap 100→150, k 3→5, separators 改为中文友好 |
+| `vector_store.py` | 启用 MMR 检索 (fetch_k=20) 增加结果多样性 |
+| `rag.py` | 增强提示词模板，增加回答规则（不编造、引用来源、冲突处理）|
+
+#### 架构改造
+
+| 文件 | 改动 |
+|------|------|
+| `model_factory.py` | **新增** - 统一模型工厂，支持切换不同 LLM Provider |
+| `app_file_uploader.py` | 支持 PDF/DOCX 解析 |
+| `app_qa.py` | 更名为"西工大政策问答平台" |
+
+#### 项目初始化
+
+| 文件 | 说明 |
+|------|------|
+| `.gitignore` | Git 忽略配置 |
+| `CLAUDE.md` | Claude Code 项目指导文件 |
+| `summary/` | 开发总结报告、测试报告 |
+| `README.md` | 项目说明文档 |
+
+#### 重要配置变更
+
+```python
+# config.py 关键参数
+chunk_size = 500          # 原 1000，减小保留更精确语义
+chunk_overlap = 150       # 原 100，增加防止边界信息丢失
+similarity_threshold = 5    # 原 3，返回更多相关结果
+
+# vector_store.py
+search_type = "mmr"       # 新增，最大边际相关性检索
+fetch_k = 20              # 新增，获取更多候选
+```
+
+**注意**：修改 chunk_size 后需要重新上传文件到知识库。

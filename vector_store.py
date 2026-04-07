@@ -11,7 +11,14 @@ class VectorStoreService(object):
             persist_directory=config.persist_directory
         )
     def get_retriever(self):
-        return self.vector_store.as_retriever(search_kwargs={"k": config.similarity_threshold})
+        # 启用 MMR (最大边际相关性) 增加结果多样性
+        return self.vector_store.as_retriever(
+            search_type="mmr",
+            search_kwargs={
+                "k": config.similarity_threshold,      # 最终返回数量
+                "fetch_k": 20                          # 从数据库获取更多候选
+            }
+        )
 
 if __name__ == "__main__":
     from langchain_community.embeddings import DashScopeEmbeddings
