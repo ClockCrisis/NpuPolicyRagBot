@@ -98,6 +98,15 @@ streamlit run app_file_uploader.py
 |------|------|
 | `app_file_uploader.py` | 新增文本输入区域，支持直接粘贴文本上传 |
 
+#### 登录功能
+
+| 文件 | 改动 |
+|------|------|
+| `config.py` | 新增 `ADMIN_USERNAME` 和 `ADMIN_PASSWORD` 配置 |
+| `app_file_uploader.py` | 新增登录验证，未登录无法上传文件 |
+
+默认账号：`admin / admin123`（可在 `config.py` 中修改）
+
 ---
 
 ### 2026-04-07

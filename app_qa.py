@@ -1,7 +1,35 @@
 import time
+import os
 from rag import RagService
 import streamlit as st
 import config as config
+
+
+def get_visit_count():
+    """获取访问次数"""
+    try:
+        if os.path.exists(config.VISIT_COUNT_FILE):
+            with open(config.VISIT_COUNT_FILE, "r") as f:
+                return int(f.read().strip())
+    except:
+        pass
+    return 0
+
+
+def increment_visit_count():
+    """增加访问次数"""
+    count = get_visit_count() + 1
+    with open(config.VISIT_COUNT_FILE, "w") as f:
+        f.write(str(count))
+    return count
+
+
+# 每次页面加载增加访问计数
+if "visit_counted" not in st.session_state:
+    st.session_state["visit_counted"] = True
+    current_count = increment_visit_count()
+else:
+    current_count = get_visit_count()
 
 # 标题
 st.title("西工大政策问答平台")
@@ -50,3 +78,6 @@ if prompt:
         st.chat_message("assistant").write_stream(capture(res_stream, ai_res_list))
         st.session_state["message"].append({"role": "assistant", "content": "".join(ai_res_list)})
 
+# 页面底部显示访问统计
+st.divider()
+st.caption(f"总访问量: {current_count} 人")
