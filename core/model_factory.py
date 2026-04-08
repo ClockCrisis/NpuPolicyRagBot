@@ -22,7 +22,8 @@ def create_embedding_model():
     # DashScope 使用专用 embeddings 客户端
     if base_url and "dashscope" in base_url:
         return DashScopeEmbeddings(
-            model=config.EMBEDDING_MODEL_NAME
+            model=config.EMBEDDING_MODEL_NAME,
+            dashscope_api_key=config.EMBEDDING_MODEL_API_KEY
         )
 
     # 其他 OpenAI 兼容 API 使用标准客户端
