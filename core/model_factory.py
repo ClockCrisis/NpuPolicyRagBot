@@ -1,3 +1,4 @@
+import os
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_community.embeddings.dashscope import DashScopeEmbeddings
 import core.config as config
@@ -5,7 +6,7 @@ import core.config as config
 
 def create_chat_model():
     """创建 Chat Model 实例（统一使用 OpenAI 兼容 API）"""
-    api_key = config.CHAT_MODEL_API_KEY
+    api_key = config.CHAT_MODEL_API_KEY or os.environ.get("DASHSCOPE_API_KEY")
     return ChatOpenAI(
         model=config.CHAT_MODEL_NAME,
         api_key=api_key,
@@ -27,7 +28,7 @@ def create_embedding_model():
         )
 
     # 其他 OpenAI 兼容 API 使用标准客户端
-    api_key = config.EMBEDDING_MODEL_API_KEY
+    api_key = config.EMBEDDING_MODEL_API_KEY or os.environ.get("OPENAI_API_KEY")
     return OpenAIEmbeddings(
         model=config.EMBEDDING_MODEL_NAME,
         api_key=api_key,

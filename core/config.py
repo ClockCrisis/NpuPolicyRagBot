@@ -25,7 +25,7 @@ CHAT_MODEL_MAX_TOKENS = 2000
 # =============================================================================
 EMBEDDING_MODEL_NAME = "text-embedding-v4"
 EMBEDDING_MODEL_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
-EMBEDDING_MODEL_API_KEY = "sk-330cb98ad9a444f2bc9f7cfd822150c0"
+EMBEDDING_MODEL_API_KEY = None
 
 # =============================================================================
 # Session 配置
