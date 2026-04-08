@@ -17,10 +17,11 @@ build/
 *.swp
 *.swo
 
-# 项目特定
-chroma_db/
-chat_history/
-md5.text
+# 项目特定 - 数据目录
+data/chroma_db/
+data/chat_history/
+data/md5.text
+data/visit_count.txt
 *.sqlite3
 
 # 环境变量

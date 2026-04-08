@@ -1,15 +1,24 @@
-import time
+import sys
 import os
-from rag import RagService
+
+# 将项目根目录添加到 Python 路径
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+import time
+from core.rag import RagService
 import streamlit as st
-import config as config
+import core.config as config
+
+# 获取 data 目录的绝对路径
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 
 
 def get_visit_count():
     """获取访问次数"""
     try:
-        if os.path.exists(config.VISIT_COUNT_FILE):
-            with open(config.VISIT_COUNT_FILE, "r") as f:
+        visit_file = os.path.join(DATA_DIR, "visit_count.txt")
+        if os.path.exists(visit_file):
+            with open(visit_file, "r") as f:
                 return int(f.read().strip())
     except:
         pass
@@ -19,7 +28,8 @@ def get_visit_count():
 def increment_visit_count():
     """增加访问次数"""
     count = get_visit_count() + 1
-    with open(config.VISIT_COUNT_FILE, "w") as f:
+    visit_file = os.path.join(DATA_DIR, "visit_count.txt")
+    with open(visit_file, "w") as f:
         f.write(str(count))
     return count
 

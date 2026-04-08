@@ -1,9 +1,9 @@
 from langchain_core.output_parsers import StrOutputParser
 
-from file_history_store import get_history
-from vector_store import VectorStoreService
-from model_factory import create_chat_model, create_embedding_model
-import config
+from core.file_history_store import get_history
+from core.vector_store import VectorStoreService
+from core.model_factory import create_chat_model, create_embedding_model
+import core.config as config
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables import RunnablePassthrough, RunnableWithMessageHistory, RunnableLambda
 

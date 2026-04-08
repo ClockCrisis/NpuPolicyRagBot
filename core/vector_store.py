@@ -1,5 +1,5 @@
 from langchain_chroma import Chroma
-import config
+import core.config as config
 
 # 向量数据库服务类，提供获取检索器的接口,返回见做到的资料
 class VectorStoreService(object):

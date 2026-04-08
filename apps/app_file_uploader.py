@@ -1,9 +1,14 @@
+import sys
+import os
+
+# 将项目根目录添加到 Python 路径
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import streamlit as st
 import tempfile
-import os
 from io import BytesIO
-from knowledge_base import KnowledgeBaseService
-import config
+from core.knowledge_base import KnowledgeBaseService
+import core.config as config
 
 # 初始化 session state
 if "logged_in" not in st.session_state:

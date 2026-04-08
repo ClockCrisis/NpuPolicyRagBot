@@ -1,7 +1,7 @@
 import os
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_community.embeddings.dashscope import DashScopeEmbeddings
-import config
+import core.config as config
 
 
 def create_chat_model():
