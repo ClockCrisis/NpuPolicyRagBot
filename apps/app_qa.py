@@ -29,6 +29,11 @@ def increment_visit_count():
     """增加访问次数"""
     count = get_visit_count() + 1
     visit_file = os.path.join(DATA_DIR, "visit_count.txt")
+    # 确保 data 目录和文件存在
+    os.makedirs(DATA_DIR, exist_ok=True)
+    if not os.path.exists(visit_file):
+        with open(visit_file, "w") as f:
+            f.write("0")
     with open(visit_file, "w") as f:
         f.write(str(count))
     return count
