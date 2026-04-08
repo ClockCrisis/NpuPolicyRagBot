@@ -16,6 +16,7 @@ build/
 .idea/
 *.swp
 *.swo
+CLAUDE.md
 
 # 项目特定 - 数据目录
 data/chroma_db/
